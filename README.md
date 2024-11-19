@@ -1,3 +1,7 @@
+### Note on Recent Updates
+A recent update included detailed comments and documentation across all code files to improve clarity and maintainability. The commit message associated with this update may appear overly simplified but reflects significant enhancements to the project.
+
+
 # Astrophysics Workflow Engine
 
 ## Overview
