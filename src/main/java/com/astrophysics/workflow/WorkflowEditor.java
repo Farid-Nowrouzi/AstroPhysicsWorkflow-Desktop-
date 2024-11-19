@@ -7,44 +7,52 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * WorkflowEditor is a JavaFX-based application that provides a graphical interface
+ * for managing and orchestrating astrophysical workflows. Users can add tasks,
+ * view their progress, and clear workflows using an intuitive interface.
+ */
 public class WorkflowEditor extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        // Set the title of the application window
         primaryStage.setTitle("Astrophysics Workflow Editor");
 
-        // Create the root layout
+        // Create the root layout using BorderPane
         BorderPane root = new BorderPane();
 
-        // Create the microservice panel (for segmentation, detection, data processing, and data validation buttons)
-        VBox microservicePanel = new VBox(10);
+        // Create the left panel with buttons for microservices
+        VBox microservicePanel = new VBox(10); // VBox with spacing between buttons
 
-        // Define buttons for each task
+        // Define buttons for available tasks
         Button segmentationButton = new Button("Segmentation");
         Button detectionButton = new Button("Detection");
         Button dataProcessingButton = new Button("Data Processing");
         Button dataValidationButton = new Button("Data Validation");
 
-        // Set tooltips for guidance
+        // Add tooltips to each button for guidance
         segmentationButton.setTooltip(new Tooltip("Start a new segmentation task"));
         detectionButton.setTooltip(new Tooltip("Start a new detection task"));
         dataProcessingButton.setTooltip(new Tooltip("Start a new data processing task"));
         dataValidationButton.setTooltip(new Tooltip("Start a new data validation task"));
 
-        // Add basic styling
+        // Style the buttons for better user experience
         String buttonStyle = "-fx-font-size: 14px; -fx-background-color: #87CEFA;";
         segmentationButton.setStyle(buttonStyle);
         detectionButton.setStyle(buttonStyle);
         dataProcessingButton.setStyle(buttonStyle);
         dataValidationButton.setStyle(buttonStyle);
 
-        // Create workflow task list and status log area
+        // Create the center area for displaying workflow tasks
         ListView<String> workflowList = new ListView<>();
+
+        // Create the bottom area for displaying execution logs
         TextArea statusArea = new TextArea();
-        statusArea.setEditable(false);
+        statusArea.setEditable(false); // Make the log area read-only
         statusArea.appendText("Execution Log:\n");
 
-        // Define action events for each button
+        // Add event handlers to buttons to simulate task execution
         segmentationButton.setOnAction(event -> {
             workflowList.getItems().add("Segmentation Task");
             statusArea.appendText("Segmentation started...\n");
@@ -69,37 +77,42 @@ public class WorkflowEditor extends Application {
             statusArea.appendText("Data Validation completed and added to workflow.\n");
         });
 
-        // Create a Clear Workflow button to reset the list and log
+        // Add a clear button to reset the workflow and log areas
         Button clearButton = new Button("Clear Workflow");
         clearButton.setTooltip(new Tooltip("Clear all tasks and log"));
         clearButton.setStyle("-fx-font-size: 12px; -fx-background-color: #FFA07A;");
 
         clearButton.setOnAction(event -> {
-            workflowList.getItems().clear();
-            statusArea.clear();
+            workflowList.getItems().clear(); // Clear the task list
+            statusArea.clear(); // Clear the log area
             statusArea.appendText("Workflow cleared.\n");
         });
 
-        // Add buttons to the panel
-        microservicePanel.getChildren().addAll(segmentationButton, detectionButton, dataProcessingButton, dataValidationButton, clearButton);
+        // Add all buttons to the microservice panel
+        microservicePanel.getChildren().addAll(
+                segmentationButton,
+                detectionButton,
+                dataProcessingButton,
+                dataValidationButton,
+                clearButton
+        );
 
-        // Place the microservice panel on the left side of the BorderPane
-        root.setLeft(microservicePanel);
+        // Position elements within the BorderPane layout
+        root.setLeft(microservicePanel); // Microservices on the left
+        root.setRight(new VBox(new Label("Workflow Tasks:"), workflowList)); // Tasks on the right
+        root.setBottom(new VBox(new Label("Execution Log:"), statusArea)); // Logs at the bottom
 
-        // Create the task list area on the right
-        VBox taskBox = new VBox(new Label("Workflow Tasks:"), workflowList);
-        root.setRight(taskBox);
-
-        // Place the log area at the bottom
-        VBox logBox = new VBox(new Label("Execution Log:"), statusArea);
-        root.setBottom(logBox);
-
-        // Set the scene and show the stage
+        // Set the main scene with defined dimensions and display the stage
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
     }
 
+    /**
+     * The main method launches the JavaFX application.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
-        launch(args);
+        launch(args); // Launch the application
     }
 }

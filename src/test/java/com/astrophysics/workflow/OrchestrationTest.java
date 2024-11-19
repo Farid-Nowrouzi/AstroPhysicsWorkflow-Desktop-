@@ -9,17 +9,17 @@ public class OrchestrationTest {
 
     @Test
     public void testOrchestrationExecution() {
-        // Initialize steps
+        // Create individual steps for processing and validation
         Step processingStep = new DataProcessingStep();
         Step validationStep = new DataValidationStep();
 
-        // Initialize workflow with the steps
+        // Create a workflow by combining the defined steps
         Workflow workflow = new Workflow(Arrays.asList(processingStep, validationStep));
 
-        // Initialize orchestration with the workflow steps
+        // Set up orchestration to manage the workflow execution
         Orchestration orchestration = new Orchestration(workflow.getSteps());
 
-        // Verify that executing orchestration does not throw any exceptions
+        // Validate that the orchestration runs successfully without throwing any exceptions
         assertDoesNotThrow(() -> orchestration.start(),
                 "Orchestration execution should not throw any exceptions.");
     }

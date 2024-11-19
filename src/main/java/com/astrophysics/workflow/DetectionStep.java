@@ -2,36 +2,38 @@ package com.astrophysics.workflow;
 
 public class DetectionStep extends BaseStep {
 
-    // Constructor
+    // Constructor to set the name of the step
     public DetectionStep() {
         super("Detection Step");
     }
 
-    // Core method to perform detection logic
+    // Override the execute method to define the specific logic for detection
     @Override
     public void execute() {
         System.out.println("Starting detection process...");
 
-        // Perform detection logic here
-        // For example, we could include image processing or object detection algorithms
         try {
-            // Simulating detection logic with sleep
-            Thread.sleep(1000);
+            // Simulate detection process with a delay
+            Thread.sleep(1000); // Simulates the initial stage of detection
             System.out.println("Detection in progress...");
 
-            // More detection logic or processing can be added here
-            Thread.sleep(1000);
+            // Simulate additional processing steps
+            Thread.sleep(1000); // Simulates the completion of detection
             System.out.println("Detection completed successfully.");
+
         } catch (InterruptedException e) {
+            // Handle interruptions during the detection process
             System.err.println("Detection process interrupted.");
+            Thread.currentThread().interrupt(); // Restore interrupted state
         }
 
-        // Call to indicate completion
+        // Mark the detection step as completed
         setCompleted(true);
     }
 
-    // A helper method for detailed logging or reporting specific to DetectionStep
+    // Helper method to generate a summary report for this step
     public String generateReport() {
+        // Provide details about the detection step execution
         return "Detection step completed. All relevant items have been detected and logged.";
     }
 }

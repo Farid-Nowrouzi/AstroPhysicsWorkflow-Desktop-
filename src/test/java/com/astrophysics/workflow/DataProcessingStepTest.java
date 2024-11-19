@@ -7,10 +7,10 @@ public class DataProcessingStepTest {
 
     @Test
     public void testExecute() {
-        // Create an instance of DataProcessingStep
+        // Create an instance of DataProcessingStep to be tested
         DataProcessingStep dataProcessingStep = new DataProcessingStep();
 
-        // Verify that executing this step throws a StepExecutionException
+        // Ensure that executing the step throws the expected StepExecutionException
         assertThrows(StepExecutionException.class, () -> {
             dataProcessingStep.execute();
         }, "DataProcessingStep execution should throw StepExecutionException.");

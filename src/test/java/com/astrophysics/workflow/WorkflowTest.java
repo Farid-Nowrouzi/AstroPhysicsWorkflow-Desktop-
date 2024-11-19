@@ -9,14 +9,14 @@ public class WorkflowTest {
 
     @Test
     public void testExecuteWorkflow() {
-        // Initialize steps
+        // Step 1: Initialize individual steps for the workflow
         Step processingStep = new DataProcessingStep();
         Step validationStep = new DataValidationStep();
 
-        // Initialize workflow with the steps
+        // Step 2: Combine the steps into a workflow
         Workflow workflow = new Workflow(Arrays.asList(processingStep, validationStep));
 
-        // Verify that executing the workflow does not throw any exceptions
+        // Step 3: Ensure that executing the workflow runs smoothly without exceptions
         assertDoesNotThrow(() -> workflow.execute(),
                 "Workflow execution should not throw any exceptions.");
     }

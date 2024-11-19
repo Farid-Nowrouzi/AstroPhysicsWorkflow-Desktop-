@@ -10,32 +10,46 @@ import java.util.Arrays;
 @SpringBootApplication
 public class AstrophysicsWorkflowApplication {
 
-    // Initialize SLF4J Logger
+    // Logger instance to capture and record application events
     private static final Logger logger = LoggerFactory.getLogger(AstrophysicsWorkflowApplication.class);
 
     public static void main(String[] args) {
+        // Start the Spring Boot application
         SpringApplication.run(AstrophysicsWorkflowApplication.class, args);
 
-        // Log application startup
+        // Log that the application is starting
         logger.info("Astrophysics Workflow Application is starting...");
 
-        // Initialize the steps
-        Step processingStep = new DataProcessingStep();
-        Step validationStep = new DataValidationStep();
-        Step segmentationStep = new SegmentationStep();
+        try {
+            // Initialize all workflow steps (processing, validation, segmentation, detection)
+            Step processingStep = new DataProcessingStep(); // Step for data processing
+            Step validationStep = new DataValidationStep(); // Step for data validation
+            Step segmentationStep = new SegmentationStep(); // Step for image segmentation
+            Step detectionStep = new DetectionStep(); // Step for performing detection tasks
 
-        // Initialize the Workflow with the steps
-        Workflow workflow = new Workflow(Arrays.asList(processingStep, validationStep, segmentationStep));
-        logger.info("Workflow initialized with processing, validation, and segmentation steps.");
+            // Combine all steps into a single workflow
+            Workflow workflow = new Workflow(Arrays.asList(
+                    processingStep,
+                    validationStep,
+                    segmentationStep,
+                    detectionStep // Add detection step to the workflow
+            ));
+            logger.info("Workflow initialized with processing, validation, segmentation, and detection steps.");
 
-        // Initialize Orchestration with the Workflow
-        Orchestration orchestration = new Orchestration(workflow.getSteps());
-        logger.info("Orchestration initialized with the workflow steps.");
+            // Set up orchestration to manage the workflow steps
+            Orchestration orchestration = new Orchestration(workflow.getSteps());
+            logger.info("Orchestration initialized with the workflow steps.");
 
-        // Start the orchestration and log each step
-        orchestration.start();
+            // Start the orchestration and execute each step
+            orchestration.start();
 
-        // Log application running state
-        logger.info("Astrophysics Workflow Application is running!");
+            // Log that the application has completed successfully
+            logger.info("Astrophysics Workflow Application completed successfully!");
+
+        } catch (OrchestrationException e) {
+            // Capture and log any exceptions that occur during orchestration
+            logger.error("An error occurred during orchestration: {}", e.getMessage());
+            e.printStackTrace(); // Print the stack trace for debugging
+        }
     }
 }

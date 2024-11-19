@@ -5,26 +5,34 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 
+<!-- Root layout using a BorderPane for a structured interface -->
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.astrophysics.workflow.controller.WorkflowController">
-    <!-- Left section: Microservice List -->
+
+    <!-- Left section: List of available microservices -->
     <left>
         <VBox fx:id="microserviceList" spacing="10">
+            <!-- Title for the microservice list -->
             <Label text="Available Microservices" />
+            <!-- Buttons for each microservice -->
             <Button text="Segmentation" />
             <Button text="Detection" />
         </VBox>
     </left>
 
-    <!-- Center section: Workflow Pane -->
+    <!-- Center section: Workflow pane where tasks will be dropped -->
     <center>
-        <Pane fx:id="workflowPane" prefWidth="600" prefHeight="400" style="-fx-background-color: #f0f0f0;" />
+        <Pane fx:id="workflowPane" prefWidth="600" prefHeight="400"
+              style="-fx-background-color: #f0f0f0;" />
     </center>
 
-    <!-- Right section: Properties Panel -->
+    <!-- Right section: Properties panel for displaying selected task details -->
     <right>
         <VBox fx:id="propertiesPanel" spacing="10">
+            <!-- Title for the properties panel -->
             <Label text="Properties" />
-            <!-- Additional UI components can go here -->
+            <!-- Placeholder for additional UI elements -->
+            <!-- Future components can be added here -->
         </VBox>
     </right>
+
 </BorderPane>
