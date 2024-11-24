@@ -49,7 +49,7 @@ public class AstrophysicsWorkflowApplication {
         } catch (OrchestrationException e) {
             // Capture and log any exceptions that occur during orchestration
             logger.error("An error occurred during orchestration: {}", e.getMessage());
-            e.printStackTrace(); // Print the stack trace for debugging
+            logger.error("Detailed error stack trace: ", e);
         }
     }
 }
