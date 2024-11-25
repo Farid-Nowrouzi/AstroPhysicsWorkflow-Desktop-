@@ -1,40 +1,89 @@
 package com.astrophysics.workflow;
 
 /**
- * Represents the segmentation step in the workflow. This step is responsible
- * for dividing an image into smaller, meaningful segments for further processing.
+ * Represents the segmentation step in the workflow.
+ * Implements multiple types of polymorphism as required.
+ * This step is responsible for segmenting data or items based on workflow needs.
  */
 public class SegmentationStep extends BaseStep {
 
-    /**
-     * Constructor to initialize the step with its name.
-     */
+    // Constructor to set the name of the step
     public SegmentationStep() {
-        super("Segmentation Step"); // Set the step name using the BaseStep constructor
+        super("Segmentation Step");
     }
 
     /**
-     * Executes the segmentation logic for this step. Simulates the process
-     * with a delay to mimic real-world computation.
+     * Override the execute method to define the specific logic for segmentation.
      *
-     * @throws StepExecutionException if an error occurs during execution
+     * @throws StepExecutionException if an error occurs during execution.
      */
     @Override
     public void execute() throws StepExecutionException {
-        System.out.println("Segmenting image..."); // Log the start of segmentation
+        System.out.println("[SegmentationStep] Starting segmentation process...");
 
         try {
-            // Simulate segmentation process with a delay
-            Thread.sleep(1500);
+            // Simulate segmentation process with delays
+            Thread.sleep(1000); // Simulates the initial stage of segmentation
+            System.out.println("[SegmentationStep] Segmentation in progress...");
 
-            // Placeholder for future segmentation logic
-            // Here, the actual logic for image segmentation would be implemented
-            // (e.g., dividing the image into regions or detecting specific areas).
+            // Simulate successful completion
+            Thread.sleep(1000); // Simulates the completion of segmentation
+            System.out.println("[SegmentationStep] Segmentation completed successfully.");
+
+            // Mark the segmentation step as completed
+            setCompleted(true);
 
         } catch (InterruptedException e) {
-            // Handle interruptions and restore the thread's interrupted state
-            Thread.currentThread().interrupt();
-            System.err.println("Segmentation process was interrupted.");
+            Thread.currentThread().interrupt(); // Restore interrupted state
+            throw new StepExecutionException("Segmentation process was interrupted.", e);
+        } catch (Exception e) {
+            throw new StepExecutionException("An unexpected error occurred during the segmentation process.", e);
         }
+    }
+
+    /**
+     * Overloaded execute method with additional context.
+     * Demonstrates overloading polymorphism.
+     *
+     * @param context Additional context for segmentation processing.
+     * @throws StepExecutionException if an error occurs during execution.
+     */
+    public void execute(String context) throws StepExecutionException {
+        if (context == null || context.isEmpty()) {
+            throw new IllegalArgumentException("Context cannot be null or empty.");
+        }
+        System.out.println("[SegmentationStep] Context: " + context);
+        execute(); // Calls the main execute logic
+    }
+
+    /**
+     * Provides a description of the step.
+     * Demonstrates parametric polymorphism by customizing the description.
+     *
+     * @return A string describing the step.
+     */
+    @Override
+    public String describeStep() {
+        return "Step: Segmentation, Status: " + (isCompleted() ? "Completed" : "Pending");
+    }
+
+    /**
+     * Performs specific segmentation logic.
+     * This method is required for coercion-based polymorphism in Workflow.
+     */
+    public void performSegmentation() {
+        System.out.println("[SegmentationStep] Performing detailed segmentation logic...");
+        // Add detailed segmentation logic here
+        System.out.println("[SegmentationStep] Detailed segmentation logic executed.");
+    }
+
+    /**
+     * Generates a detailed report for this step.
+     * Demonstrates method customization in the subclass.
+     *
+     * @return A string describing the segmentation results.
+     */
+    public String generateReport() {
+        return "[SegmentationStep] Segmentation step completed. Data has been segmented and logged.";
     }
 }

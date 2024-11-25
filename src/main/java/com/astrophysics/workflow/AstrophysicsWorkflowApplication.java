@@ -28,7 +28,7 @@ public class AstrophysicsWorkflowApplication {
             Step detectionStep = new DetectionStep(); // Step for performing detection tasks
 
             // Combine all steps into a single workflow
-            Workflow workflow = new Workflow(Arrays.asList(
+            Workflow<Step> workflow = new Workflow<>(Arrays.asList(
                     processingStep,
                     validationStep,
                     segmentationStep,

@@ -1,17 +1,26 @@
 package com.astrophysics.workflow;
 
 /**
- * Custom exception to indicate errors during the execution of a workflow step.
- * This exception is thrown when a step encounters an issue that prevents it from completing successfully.
+ * Custom exception for errors occurring during step execution.
  */
 public class StepExecutionException extends Exception {
 
     /**
-     * Constructor to create a StepExecutionException with a specific error message.
+     * Constructor to create a StepExecutionException with a specific message.
      *
-     * @param message the detailed error message explaining the cause of the exception
+     * @param message the detail message.
      */
     public StepExecutionException(String message) {
-        super(message); // Pass the error message to the parent Exception class
+        super(message);
+    }
+
+    /**
+     * Constructor to create a StepExecutionException with a specific message and cause.
+     *
+     * @param message the detail message.
+     * @param cause the cause of the exception.
+     */
+    public StepExecutionException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

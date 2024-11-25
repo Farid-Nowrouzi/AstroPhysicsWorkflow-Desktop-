@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 /**
  * Entry point for the Astrophysics Workflow application.
- * This class extends the JavaFX Application class to initialize and display the graphical user interface (GUI).
+ * This class initializes and displays the graphical user interface (GUI) using JavaFX.
  */
 public class WorkflowApp extends Application {
 
@@ -22,7 +22,7 @@ public class WorkflowApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         // Load the FXML layout file for the application's interface
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/WorkflowInterface.fxml"));
-        Parent root = loader.load(); // Load the UI layout
+        Parent root = loader.load();
 
         // Set the title of the main application window
         primaryStage.setTitle("Astrophysics Workflow Engine");
@@ -40,6 +40,6 @@ public class WorkflowApp extends Application {
      * @param args command-line arguments (not used in this application)
      */
     public static void main(String[] args) {
-        launch(args); // Launch the JavaFX application
+        launch(args);
     }
 }

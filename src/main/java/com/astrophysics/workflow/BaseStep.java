@@ -1,5 +1,9 @@
 package com.astrophysics.workflow;
 
+/**
+ * Represents the base implementation of a workflow step, providing common functionality
+ * and structure for all derived step classes.
+ */
 public abstract class BaseStep implements Step {
 
     // Name of the step, used to identify and describe it
@@ -10,6 +14,9 @@ public abstract class BaseStep implements Step {
 
     // Constructor to initialize the step with a specific name
     public BaseStep(String stepName) {
+        if (stepName == null || stepName.isEmpty()) {
+            throw new IllegalArgumentException("Step name cannot be null or empty");
+        }
         this.stepName = stepName;
     }
 
@@ -31,6 +38,22 @@ public abstract class BaseStep implements Step {
     // Abstract method that must be implemented by subclasses to define the specific step logic
     @Override
     public abstract void execute() throws StepExecutionException;
+
+    // Overloaded execute method with additional context parameter (overloading polymorphism)
+    @Override
+    public void execute(String context) throws StepExecutionException {
+        if (context == null) {
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+        System.out.println("Executing step: " + stepName + " with context: " + context);
+        execute(); // Call the default execution logic
+    }
+
+    // Default implementation for describing the step (parametric polymorphism)
+    @Override
+    public String describeStep() {
+        return "Step Name: " + stepName + ", Status: " + (completed ? "Completed" : "In Progress or Not Started");
+    }
 
     // Method to provide a status message describing the current state of the step
     public String getStatus() {

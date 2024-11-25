@@ -1,28 +1,28 @@
 package com.astrophysics.workflow;
 
 /**
- * Represents a custom exception that handles errors during the execution of a workflow.
- * This exception can be thrown when a critical issue occurs in any workflow step,
- * indicating that the execution should stop or be handled with specific logic.
+ * Represents a custom exception for handling errors during workflow execution.
+ * This exception is thrown when a critical issue occurs in any workflow step,
+ * indicating that the execution should stop or require special handling.
  */
 public class WorkflowExecutionException extends Exception {
 
     /**
-     * Constructor to create a WorkflowExecutionException with a custom error message.
+     * Constructs a WorkflowExecutionException with a descriptive error message.
      *
-     * @param message A descriptive message explaining the cause of the exception.
+     * @param message A message explaining the cause of the exception.
      */
     public WorkflowExecutionException(String message) {
-        super(message); // Pass the message to the superclass (Exception)
+        super(message); // Pass the message to the superclass
     }
 
     /**
-     * Constructor to create a WorkflowExecutionException with a message and a root cause.
+     * Constructs a WorkflowExecutionException with a message and the root cause.
      *
-     * @param message A descriptive message explaining the cause of the exception.
-     * @param cause   The original exception that caused this exception, useful for debugging.
+     * @param message A message explaining the cause of the exception.
+     * @param cause   The underlying exception that caused this exception, useful for debugging.
      */
     public WorkflowExecutionException(String message, Throwable cause) {
-        super(message, cause); // Pass both message and cause to the superclass (Exception)
+        super(message, cause); // Pass both the message and cause to the superclass
     }
 }
